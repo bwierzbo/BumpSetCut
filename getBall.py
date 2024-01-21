@@ -6,7 +6,7 @@ import numpy as np
 #this is the path of where getball outputs its images into
 imageoutpath = ('../BumpSetCut/images')
 #This is where you set the path to the volleyball video
-videoCapture = cv.VideoCapture('../BumpSetCut/video/shortClip.mp4/')
+videoCapture = cv.VideoCapture('../BumpSetCut/video/shorterClip.mp4/')
 videoCapture.set(cv.CAP_PROP_BUFFERSIZE, 2)
 prevCircle = None
 dist = lambda x1,y1,x2,y2: (x1-x2)**2+(y1-y2)**2
