@@ -1,7 +1,8 @@
 import os
 import cv2 as cv
 import numpy as np
-from tensorflow import keras
+import keras
+import tensorflow as tf
 from keras.models import load_model
 
 # Load your trained model
