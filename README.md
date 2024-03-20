@@ -6,15 +6,12 @@ How to use
 
 *python getball.py*
 
-4. Manually classify the images into two folders ball/notBall
-5. Format images and traintestsplit
+3. Manually classify the images into two folders ball/notBall
 
-*python formattraintestsplit.py*
-
-7. Create keras model from dataset created
+4. Create keras model from dataset created
 
 *python train.py*
 
-8. Run playback with ball detection
+5. Run playback with ball detection
 
 *python isBall.py*
