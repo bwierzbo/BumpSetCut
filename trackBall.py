@@ -1,14 +1,14 @@
 import os
 import cv2 as cv
 import numpy as np
-from tensorflow import keras
+import tensorflow as tf
 from keras.models import load_model
 
 # Load your trained model
-model = load_model('../BumpSetCut/my_model.keras')
+model = load_model('models/windowsAdvanced.keras')
 
 #Video stuff 
-videoCapture = cv.VideoCapture('../BumpSetCut/video/longerClip.mp4/')
+videoCapture = cv.VideoCapture('video/Rangle.mp4')
 videoCapture.set(cv.CAP_PROP_BUFFERSIZE, 2)
 prevCircle = None
 dist = lambda x1,y1,x2,y2: (x1-x2)**2+(y1-y2)**2
@@ -46,7 +46,7 @@ while True:
 
     #Circle Detection
     #See for HoughCircles perameter description https://docs.opencv.org/4.x/dd/d1a/group__imgproc__feature.html#ga47849c3be0d0406ad3ca45db65a25d2d
-    circles = cv.HoughCircles(mask, cv.HOUGH_GRADIENT_ALT, 1.5, 1, param1=250, param2= 0.8, minRadius=3, maxRadius=40)
+    circles = cv.HoughCircles(mask, cv.HOUGH_GRADIENT_ALT, 1.5, 1, param1=250, param2= 0.84, minRadius=3, maxRadius=40)
 
     if circles is not None:
             circles = np.uint16(np.around(circles))
@@ -115,7 +115,7 @@ while True:
                     track_window = (x - 20, y - 20, w + 40, h + 40)
                     tx, ty, tw, th = track_window
                     #Create tracking window for next ball to be detected
-                elif firstBall == False:
+                elif firstBall == False and predicted_class == 'ball':
                     track_window = (px - 20, py - 20, pw + 40, ph + 40)
                     tx, ty, tw, th = track_window
                     cv.rectangle(frame, (tx, ty), (tx + tw, ty + th), (0, 255, 0), 2)
@@ -126,7 +126,7 @@ while True:
                     #if ball is in track window otherwise remove
                     
                     #Green circle of predicted ball
-                    #cv.circle(frame, (chosen[0], chosen[1]), chosen[2], (0,255,0), 3)
+                    cv.circle(frame, (chosen[0], chosen[1]), chosen[2], (0,255,0), 3)
 
                     
                     center = get_centroid(x, y, w, h)

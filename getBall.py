@@ -3,22 +3,25 @@ import cv2 as cv
 import numpy as np
 
 
+
 #this is the path of where getball outputs its images into
-imageoutpath = ('../BumpSetCut/images')
+
+imageoutpath = ('../BumpSetCut/images/getballimages')
+videopath = ("../BumpSetCut/video/Rangle.mp4")
 #This is where you set the path to the volleyball video
-videoCapture = cv.VideoCapture('../BumpSetCut/video/shorterClip.mp4/')
+
+videoCapture = cv.VideoCapture(videopath)
 videoCapture.set(cv.CAP_PROP_BUFFERSIZE, 2)
 prevCircle = None
 dist = lambda x1,y1,x2,y2: (x1-x2)**2+(y1-y2)**2
 
 backSub = cv.createBackgroundSubtractorKNN()
 n=0
-
 while True:
     ret, frame = videoCapture.read()
     if not ret: break
     
-    frame = cv.resize(frame, (1920,1080))
+    frame = cv.resize(frame, (1280,720))
 
     mask = backSub.apply(frame)
 
@@ -28,7 +31,7 @@ while True:
 
 
     #See for HoughCircles perameter description https://docs.opencv.org/4.x/dd/d1a/group__imgproc__feature.html#ga47849c3be0d0406ad3ca45db65a25d2d
-    circles = cv.HoughCircles(mask, cv.HOUGH_GRADIENT_ALT, 1.5, 1, param1=250, param2= 0.8, minRadius=3, maxRadius=40)
+    circles = cv.HoughCircles(mask, cv.HOUGH_GRADIENT_ALT, 1.5, 1, param1=250, param2= 0.85, minRadius=3, maxRadius=40)
 
     if circles is not None:
             circles = np.uint16(np.around(circles))
@@ -80,7 +83,7 @@ while True:
 
     cv.imshow("getBall", frame)
 
-    if cv.waitKey(30) & 0xFF == ord('q'): break
+    if cv.waitKey(1) & 0xFF == ord('q'): break
 
 videoCapture.release()
 cv.destroyAllWindows()

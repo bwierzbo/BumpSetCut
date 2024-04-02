@@ -11,9 +11,10 @@ from keras.layers import Dense, GlobalAveragePooling2D, Dropout, BatchNormalizat
 from keras.models import Model
 from keras.callbacks import EarlyStopping
 from keras.regularizers import l2
-from keras.src.legacy.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import ImageDataGenerator
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 import matplotlib.pyplot as plt
 
 
@@ -102,4 +103,23 @@ history = model.fit(
     callbacks=[early_stop]
 )
 
+# Predict on the test set
+predictions_prob = model.predict(X_test)  # These are probabilities
+predictions = (predictions_prob > 0.5).astype(int)  # Convert probabilities to binary labels
+
+# Calculate Precision, Recall, and F1 Score
+precision = precision_score(y_test, predictions)
+recall = recall_score(y_test, predictions)
+f1 = f1_score(y_test, predictions)
+
+print(f"Precision: {precision:.4f}")
+print(f"Recall: {recall:.4f}")
+print(f"F1 Score: {f1:.4f}")
+
+# For a comprehensive report
+print("\nClassification Report:\n", classification_report(y_test, predictions))
+
+
+
 model.save('my_model.keras')  # Save the model to disk
+model.save('deployment')
