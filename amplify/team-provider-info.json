@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bumpsetcut-dev-b379e-authRole",
+      "UnauthRoleArn": "arn:aws:iam::508417564420:role/amplify-bumpsetcut-dev-b379e-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::508417564420:role/amplify-bumpsetcut-dev-b379e-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bumpsetcut-dev-b379e-deployment",
+      "UnauthRoleName": "amplify-bumpsetcut-dev-b379e-unauthRole",
+      "StackName": "amplify-bumpsetcut-dev-b379e",
+      "StackId": "arn:aws:cloudformation:us-east-1:508417564420:stack/amplify-bumpsetcut-dev-b379e/3f882210-3e40-11ef-8d95-12d49a378777",
+      "AmplifyAppId": "d3b968ynxoj6ck"
+    },
+    "categories": {
+      "auth": {
+        "bumpsetcut5df42898": {}
+      },
+      "storage": {
+        "videoStorage": {}
+      }
+    }
+  }
+}
